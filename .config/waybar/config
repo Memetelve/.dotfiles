@@ -33,9 +33,9 @@
         "custom/storage",
         "memory",
         "cpu",
-        "pulseaudio",
+        "pulseaudio"
         //"wireplumber",
-        "tray"
+        //"tray"
     ],
 
 
@@ -247,8 +247,8 @@
 
     "cpu": {
         "interval": 1,
-        //"format": " {}%", // Icon: microchip
-        "format": "{max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>",
+        "format": " {}%", // Icon: microchip
+        "format": "{max_frequency}GHz | {usage}%",
         "max-length": 13,
         "min-length": 13
     },
