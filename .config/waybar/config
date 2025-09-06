@@ -16,32 +16,36 @@
     "spacing": 5, // Gaps between modules (4px)
 
     "modules-left": [
-        //"custom/rofi",
         "hyprland/workspaces",
-        //"hyprland/submap",
-        "temperature",
-        //"idle_inhibitor",
-        //"mpd"
+	"pulseaudio",
+	"sp2",
         "custom/spotify"
     ],
     "modules-center": [
-        //"hyprland/window"
+        //"hyprland/window",
         "clock",
-        "custom/gammastep"
     ],
     "modules-right": [
+	"custom/network-speed",
+	"sp2",
         "custom/storage",
+	"tray",
         "memory",
         "cpu",
-        "pulseaudio"
-        //"wireplumber",
-        //"tray"
+	"temperature",
+	"custom/pacman"
     ],
 
 
     // -------------------------------------------------------------------------
     // Modules
     // -------------------------------------------------------------------------
+    "custom/network-speed": {
+        "exec": "/home/memetelve/.config/waybar/network_speed.py",
+        "return-type": "json",
+        "format": "{text}",
+        "tooltip": true
+    },
 
     "custom/sp1": {
         "format": " | ",
@@ -52,6 +56,17 @@
         "tooltip": false
     },
 
+    "custom/pacman": {
+	    "format": "{icon}{0}",
+	    "return-type": "json",
+	    "format-icons": {
+	      "pending-updates": " ",
+	      "updated": ""
+	    },
+	    "exec-if": "which waybar-updates",
+	    "exec": "waybar-updates",
+	    "on-click": "kitty sh -c 'paru && read -p done!'",
+  },
 
     "custom/rofi": {
         "format": "",
@@ -169,17 +184,6 @@
         //"exec": "~/.config/waybar/modules/weather.sh",
         "exec-if": "ping wttr.in -c1"
     },
-    "custom/pacman": {
-        "format": "<big>􏆲</big>  {}",
-        "interval": 3600,                     // every hour
-        "exec": "checkupdates | wc -l",       // # of updates
-        "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "alacritty -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
-        "signal": 8,
-        "max-length": 5,
-        "min-length": 3
-    },
-
 "custom/spotify": {
     "exec": "~/.config/waybar/mediaplayer.py --player spotify",
     "format": "{}  ",
