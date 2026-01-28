@@ -1,24 +1,41 @@
 {
   "layer": "top",
   "position": "top",
-  "margin-bottom": -10,
+  "margin-bottom": -6,
   "spacing" : 0,
+
   "modules-left": [
-  "hyprland/workspaces",
-  "custom/uptime",
-  "cpu"
+    "hyprland/workspaces",
+    "custom/uptime",
+    "cpu",
   ],
 
-  "modules-center": ["clock"],
+  "modules-center": ["idle_inhibitor", "clock"],
 
   "modules-right": [
     "custom/pomodoro",
     "bluetooth",
     "network",
-    "pulseaudio", 
+    "pulseaudio",
     "backlight",
+    "custom/pacman",
     "battery",
   ],
+
+  "custom/pacman": {
+    "exec": "/home/memetelve/.config/waybar/scripts/pacman-updates.sh",
+    "interval": 15,
+    "return-type": "json",
+    "tooltip": true,
+    "on-click": "sh -c \"${TERMINAL:-alacritty} -e ${AUR_HELPER:-paru} -Syu\""
+  },
+
+  "custom/idle-time": {
+    "exec": "/home/memetelve/.config/waybar/scripts/idle-time.sh",
+    "interval": 1,
+    "format": "{}",
+    "tooltip": false
+  },
 
   "hyprland/workspaces": {
     "format": "{name}: {icon}",
@@ -53,10 +70,21 @@
   },
 
   "clock": {
-    "timezone": "Asia/Kolkata",
+    "timezone": "Europe/Warsaw",
     "tooltip": false,
     "format": "{:%H:%M:%S  -  %A, %d}",
     "interval": 1
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾆"
+    },
+    "tooltip": true,
+    "tooltip-format-activated": "Coffee Mode: Active",
+    "tooltip-format-deactivated": "Coffee Mode: Inactive"
   },
 
   "network": {
